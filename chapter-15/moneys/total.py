@@ -1,7 +1,6 @@
 """金額合計"""
-from .money import Money
+from .money import Expression, Money
 from .exchanger import CurrencyExchanger
-from .expression import Expression
 
 class Total(Expression):
     """金額の合計を表します。"""
@@ -11,11 +10,11 @@ class Total(Expression):
         self._augend = augend
         self._addend = addend
 
-    def augend(self) -> Money:
+    def augend(self) -> Expression:
         """被加算数"""
         return self._augend
 
-    def addend(self) -> Money:
+    def addend(self) -> Expression:
         """加算数"""
         return self._addend
 
@@ -27,4 +26,4 @@ class Total(Expression):
 
     def plus(self, addend: Expression) -> Expression:
         """加算"""
-        pass
+        raise NotImplementedError()

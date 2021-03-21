@@ -62,3 +62,9 @@ class MoneyTest(ut.TestCase):
     def test_identity_rate(self):
         """同一貨幣"""
         self.assertEqual(1, Bank().rate("USD", "USD"))
+
+    def test_rate_notfound(self):
+        """変換レートが存在しない"""
+        bank = Bank()
+        with self.assertRaises(KeyError):
+            bank.rate("USD", "FRN")

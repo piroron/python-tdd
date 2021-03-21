@@ -32,7 +32,10 @@ class Total(Expression):
 
 ### reduce関連
 
-* total.py
+#### Expression
+`money.py`とファイルを分けると、 `from .money import Money`という記述が循環参照となるため、 `money.py`内に定義している
+
+#### `total.py`
 
 ```python
 def reduce(self, currency: str) -> Money:
@@ -41,16 +44,7 @@ def reduce(self, currency: str) -> Money:
     return Money(amount, currency)
 ```
 
-* money.py
-
-```python
-def reduce(self, currency: str) -> "Money":
-    return self
-```
-
-`Money`は、自身の`Money`を解決できないため、戻り値型を文字列にする
-
-* bank.py
+#### `bank.py`
 
 ```python
 def reduce(self, source: Expression, currency: str) -> Money:

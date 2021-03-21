@@ -1,6 +1,5 @@
 """銀行"""
-from .expression import Expression
-from .money import Money
+from .money import Expression, Money
 
 class Bank(object):
     """銀行を表します。"""

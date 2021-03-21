@@ -1,4 +1,5 @@
 """通貨基底クラス"""
+from __future__ import annotations
 from abc import ABCMeta, abstractmethod
 
 class Money(metaclass=ABCMeta):
@@ -10,7 +11,7 @@ class Money(metaclass=ABCMeta):
         self._currency = currency
 
     @abstractmethod
-    def times(self, multiplier: int) -> "Money":
+    def times(self, multiplier: int) -> Money:
         """金額を指定倍して返す"""
         pass
 
@@ -18,19 +19,19 @@ class Money(metaclass=ABCMeta):
         """通貨単位"""
         return self._currency
 
-    def __eq__(self, other: "Money") -> bool:
+    def __eq__(self, other: Money) -> bool:
         """override eq"""
         return (self._amount == other._amount) and \
             (self.__class__.__name__ == other.__class__.__name__)
 
     @staticmethod
-    def dollar(amount: int) -> "Money":
+    def dollar(amount: int) -> Money:
         """ドルを作成して、返す"""
         from .dollar import Dollar
         return Dollar(amount)
 
     @staticmethod
-    def franc(amount: int) -> "Money":
+    def franc(amount: int) -> Money:
         """フランを作成して、返す"""
         from .franc import Franc
         return Franc(amount)
