@@ -1,7 +1,6 @@
 """金額合計"""
-from .money import Money
+from .money import Expression, Money
 from .exchanger import CurrencyExchanger
-from .expression import Expression
 
 class Total(Expression):
     """金額の合計を表します。"""

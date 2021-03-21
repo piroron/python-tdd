@@ -1,12 +1,12 @@
 """銀行"""
-from .money import Money
+from typing import Dict, Tuple
+from .money import Expression, Money
 from .exchanger import CurrencyExchanger
-from .expression import Expression
 
 class Bank(CurrencyExchanger):
     """銀行を表します。"""
     def __init__(self):
-        self._rates = dict()
+        self._rates: Dict[Tuple[str, str], int] = dict()
 
     def reduce(self, source: Expression, currency: str) -> Money:
         """式を単純な形に変形する"""
@@ -20,4 +20,6 @@ class Bank(CurrencyExchanger):
         """変換率を取得"""
         if fromcurr == tocurr:
             return 1
-        return self._rates.get((fromcurr, tocurr))
+        if (fromcurr, tocurr) not in self._rates.keys():
+            raise KeyError()
+        return self._rates.get((fromcurr, tocurr), 0)

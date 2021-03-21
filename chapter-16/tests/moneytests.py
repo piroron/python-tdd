@@ -63,6 +63,12 @@ class MoneyTest(ut.TestCase):
         """同一貨幣"""
         self.assertEqual(1, Bank().rate("USD", "USD"))
 
+    def test_rate_notfound(self):
+        """変換レートが存在しない"""
+        bank = Bank()
+        with self.assertRaises(KeyError):
+            bank.rate("USD", "FRN")
+
     def test_mixed_addition(self):
         """異なる通貨の加算"""
         five_bucks = Money.dollar(5)
